@@ -8,6 +8,28 @@ An intelligent, AI-powered automation migration engine designed to translate leg
 
 The **SJP Converter** leverages the power of Local LLMs (Ollama) and a deterministic 3-layer architecture (B.L.A.S.T. Protocol) to ensure that your migration is not just a 1:1 code swap, but a modernization of your entire automation logic.
 
+## 🏗️ Architecture Diagram
+
+```mermaid
+graph TD
+    User([User]) -->|Pastes Selenium Java| UI[Premium React Dashboard]
+    UI -->|API Request| Backend[Node/Express Server]
+    
+    subgraph AI_Engine [Local Intelligence]
+        Backend -->|Context + Prompt| LLM[Ollama - tinyllama]
+        LLM -->|Raw Playwright Code| Backend
+    end
+    
+    subgraph Logic_Layer [Deterministic Cleanup]
+        Backend -->|Raw Code| Python[Python Post-Processor]
+        Python -->|Clean/Validated Code| Backend
+    end
+    
+    Backend -->|Final Payload| UI
+    Backend -->|Save File| FS[(Local File System /output)]
+    UI -->|Display| User
+```
+
 ## ✨ Key Features
 
 - **Local LLM Integration**: Uses **Ollama** for secure, private, and offline code translation (No data leaves your machine).
